@@ -7,7 +7,7 @@ const { expect } = require('chai');
 describe('Transfer', () => {
     describe('POST /transfer', () => {
          it('Quando informo remetente e destinatario inexistentes recebo 400', async () => {
-            const resposta = await request('http://localhost:3000/api-docs/') // Passamos a URL da API ao invés do APP
+            const resposta = await request('http://localhost:3000') // Passamos a URL da API ao invés do APP
                 .post('/transfer')
                 .send({
                     from: "jadson",
