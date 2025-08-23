@@ -22,4 +22,10 @@ jobs:
         run: npm install
 
       - name: Executar testes
-        run: npm test
+        run: npm run test-controller
+
+      - name: Subir a API
+        run: npm start & # o & faz que a api seja iniciado em blackground/pano de fundo
+
+      - name: Rodar os testes de API via HTTP
+        run: npm run test-external
