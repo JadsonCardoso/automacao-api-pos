@@ -13,6 +13,9 @@ exports.register = (req, res) => {
   res.status(201).json({ user: result.user });
 };
 
+const jwt = require('jsonwebtoken');
+const { SECRET } = require('../middleware/authMiddleware');
+
 exports.login = (req, res) => {
   const { username, password } = req.body;
   if (!username || !password) {
@@ -22,7 +25,9 @@ exports.login = (req, res) => {
   if (result.error) {
     return res.status(401).json({ error: result.error });
   }
-  res.json({ message: 'Login realizado com sucesso', user: result.user });
+  // Gera o token JWT
+  const token = jwt.sign({ username: result.user.username }, SECRET, { expiresIn: '1h' });
+  res.json({ message: 'Login realizado com sucesso', token, user: result.user });
 };
 
 exports.list = (req, res) => {
