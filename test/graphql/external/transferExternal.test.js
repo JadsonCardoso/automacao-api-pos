@@ -6,7 +6,7 @@ require('dotenv').config(); // Importando o dotENV
 const chaiExclude = require('chai-exclude').default; // Importando o chaiExlude
 use(chaiExclude); // Passando o ChaiExClude para dentro do CHAI(USE)
 
-describe.only('Teste de Transferência', () => {
+describe('Teste de Transferência', () => {
     beforeEach(async () => { // Esse before será rodado uma vez antes de cada IT
         const loginUser = require('../fixture/requisicoes/login/loginUser.json'); // Importante a FIXTURE COM os dados.
         const resposta = await request(process.env.BASE_URL_GRAPHQL) // Passando a URL do servidor
