@@ -6,22 +6,52 @@ Esta API permite o registro, login, consulta de usuários e transferências de v
 - Node.js
 - Express
 - Swagger (documentação)
+- Apollo Server (GraphQL)
 
 ## Instalação
 
 1. Clone o repositório ou copie os arquivos para seu ambiente.
+npm install express swagger-ui-express
 2. Instale as dependências:
    ```
-npm install express swagger-ui-express
+   npm install express swagger-ui-express @apollo/server graphql graphql-tag cors body-parser jsonwebtoken
    ```
+
 
 ## Como rodar
 
-- Para iniciar o servidor:
-  ```
-  node server.js
-  ```
-- O servidor rodará por padrão na porta 3000.
+- Para iniciar o servidor REST:
+   ```
+   node server.js
+   ```
+   O servidor rodará por padrão na porta 3000.
+
+- Para iniciar o servidor GraphQL:
+   ```
+   node graphql/server.js
+   ```
+   O servidor GraphQL rodará por padrão na porta 4000.
+## API GraphQL
+
+### Endpoints
+
+- `POST /graphql` — Endpoint principal para queries e mutations.
+
+### Queries disponíveis
+- `users`: Lista todos os usuários
+- `transfers`: Lista todas as transferências (requer autenticação JWT)
+
+### Mutations disponíveis
+- `register(username, password, isFavored)`: Registra um novo usuário
+- `login(username, password)`: Realiza login e retorna o token JWT
+- `transfer(from, to, amount)`: Realiza transferência (requer autenticação JWT)
+
+### Autenticação JWT
+- Após o login, utilize o token JWT retornado para autenticar mutations de transferência e consulta de transferências.
+- No Playground/Altair/Insomnia, envie o header:
+   ```
+   Authorization: Bearer <seu_token_jwt>
+   ```
 
 ## Endpoints
 
@@ -47,4 +77,4 @@ npm install express swagger-ui-express
 - O saldo inicial de cada usuário é de R$ 10.000,00.
 
 ## Documentação Swagger
-Acesse [http://localhost:3000/api-docs](http://localhost:3000/api-docs) após iniciar o servidor para visualizar e testar os endpoints. a
+Acesse [http://localhost:3000/api-docs](http://localhost:3000/api-docs) após iniciar o servidor para visualizar e testar os endpoints REST.
