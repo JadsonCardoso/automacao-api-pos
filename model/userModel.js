@@ -14,6 +14,11 @@ const users = [
     isFavored: ['jadson'],
     balance: 10000
   },
+  {
+    username: 'joao',
+    password: '123456',
+    balance: 10000
+  },
 ];
 
 module.exports = {
