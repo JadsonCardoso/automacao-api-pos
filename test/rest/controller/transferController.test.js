@@ -4,11 +4,11 @@ const sinon = require('sinon');
 const { expect } = require('chai');
 
 // Aplicacao
-const app = require('../../app');
+const app = require('../../../app');
 const { equal } = require('assert');
 
 // Mock
-const transferService = require('../../service/transferService'); // Importar o TransferService
+const transferService = require('../../../service/transferService'); // Importar o TransferService
 const { afterEach } = require('mocha');
 
 // Testes
@@ -38,7 +38,7 @@ describe('Transfer Controller', () => {
                 .set('Authorization', `Bearer ${this.token}`) // Authorization é a autentifcação (cadeado) de segurança. Passamos o 'Bearer e concatenano com o TOKEN'
                 .send({
                     from: "jadson",
-                    to: "joao",
+                    to: "maria",
                     amount: 100
                 });
 
