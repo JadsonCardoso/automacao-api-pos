@@ -35,15 +35,20 @@ describe('Teste de Transferência', () => {
             .to.deep.equal(respostaEsperada.data.transfer)
     });
 
-    it('Não é possível transferir valor maior que o saldo', async () => {
-        createTransfer.variables.amount = 10000.01; // Alterando o valor dentro do testes
-        const respostaTransferencia = await request(process.env.BASE_URL_GRAPHQL)
-            .post('')  // É o caminho/rota/url da API
-            .set('Authorization', `Bearer ${this.token}`)
-            .send(createTransfer);
+    const testesDeErrosDeNegocio = require('../fixture/requisicoes/transferencia/createTransferWithError.json') // Importando a Fixture
 
-        expect(respostaTransferencia.status).to.equal(200);
-        expect(respostaTransferencia.body.errors[0].message).to.equal('Saldo insuficiente'); // Pegando a 'ERROS' e pegando o primerio Item da sua Lista, com veridicando o valor desse item
 
-    });
+    testesDeErrosDeNegocio.forEach(testes => {
+        it(`Testando a regra  relacionado a ${testes.nomeDoTeste}`, async () => {
+            createTransfer.variables.amount = 10000.01; // Alterando o valor dentro do testes
+            const respostaTransferencia = await request(process.env.BASE_URL_GRAPHQL)
+                .post('')  // É o caminho/rota/url da API
+                .set('Authorization', `Bearer ${this.token}`)
+                .send(testes.createTransfer); // O crentTrnasfer está sendo importado acima.
+
+            expect(respostaTransferencia.status).to.equal(200);
+            expect(respostaTransferencia.body.errors[0].message).to.equal(testes.mensagemEsperada);
+
+        });
+    })
 })

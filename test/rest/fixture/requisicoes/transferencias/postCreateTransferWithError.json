@@ -1,0 +1,29 @@
+[
+    {
+        "nomeDoTeste": "Saldo insuficiente",
+        "postTransfer": {
+            "from": "jadson",
+            "to": "yasmin",
+            "amount": 10000.01
+        },
+        "mensagemEsperada": "Saldo insuficiente"
+    },
+    {
+        "nomeDoTeste": "Remetente não encontrado",
+        "postTransfer": {
+            "from": "jadson",
+            "to": "pedro",
+            "amount": 10000.01
+        },
+        "mensagemEsperada": "Usuário remetente ou destinatário não encontrado"
+    },
+    {
+        "nomeDoTeste": "Destinatário não encontrado",
+        "postTransfer": {
+            "from": "jadson",
+            "to": "pedro",
+            "amount": 10
+        },
+        "mensagemEsperada": "Usuário remetente ou destinatário não encontrado"
+    }
+]
